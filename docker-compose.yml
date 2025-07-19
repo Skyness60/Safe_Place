@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  safe_place_node:
+    container_name: safe_place
+    build:
+      context: .
+      dockerfile: ./docker/node/Dockerfile
+    ports:
+      - "8081:8081"   # Metro bundler
+      - "19000:19000" # Expo (App)
+      - "19001:19001" # Debugger
+      - "19002:19002" # Expo DevTools (web)
+    volumes:
+      - .:/app
+      - /app/node_modules
+    stdin_open: true
+    tty: true
+    command: yarn start
